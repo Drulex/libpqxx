@@ -96,3 +96,14 @@ if(NOT SKIP_PQXX_STATIC)
 	set_target_properties(pqxx_static PROPERTIES OUTPUT_NAME pqxx)
 	library_target_setup(pqxx_static)
 endif()
+
+# install pkg-config file
+set(prefix ${CMAKE_INSTALL_PREFIX})
+set(exec_prefix \${prefix})
+set(libdir "\${prefix}/${CMAKE_INSTALL_LIBDIR}")
+set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
+set(VERSION ${PROJECT_VERSION})
+configure_file(${CMAKE_SOURCE_DIR}/libpqxx.pc.in ${CMAKE_BINARY_DIR}/libpqxx.pc)
+install(FILES ${CMAKE_BINARY_DIR}/libpqxx.pc
+	DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+)
